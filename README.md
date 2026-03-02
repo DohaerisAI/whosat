@@ -15,21 +15,17 @@
 
 ---
 
-Built with [Textual](https://github.com/Textualize/textual) for a rich TUI experience.
+## What is whosat?
 
-## Features
+**whosat** is a terminal-based system monitor that answers one question: *"who's sitting on that port?"*
 
-- **Port & Process Monitoring** -- See all listening ports with owning processes, CPU/memory usage, and uptime
-- **Memory View** -- System-wide process memory usage with GPU memory tracking (NVIDIA)
-- **Docker Integration** -- Optional container monitoring alongside system processes
-- **Group & Flat Views** -- Group processes by name or view as a flat list
-- **Detail Panel** -- Expand any process to see full network info, open ports, resource usage, and CPU sparkline
-- **Actions** -- Ping, curl, and kill processes directly from the TUI
-- **Live Refresh** -- Configurable auto-refresh (15s / 30s / 1m / 2m / off)
-- **Theming** -- 6 built-in themes (matrix, nord, dracula, tokyo-night, gruvbox, solarized)
-- **Search & Filter** -- Search by process name, port, or IP; filter by scope (system / docker)
-- **Keyboard Driven** -- Full keyboard navigation with vim-style shortcuts
-- **Cross-platform** -- Linux, macOS, and WSL2
+It scans all listening ports on your machine, groups them by process, enriches them with CPU/memory stats, and displays everything in a rich interactive TUI. Think of it as `htop` meets `netstat` — you get a live, searchable, themeable dashboard showing every port, the process behind it, and what resources it's consuming.
+
+Whether you're debugging a port conflict, hunting down a runaway process, or just want a quick overview of what's running on your system — `whosat` gives you the answer in one command.
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/DohaerisAI/whosat/main/assets/whosat_screen.png" alt="whosat screenshot" width="100%">
+</p>
 
 ## Install
 
@@ -50,6 +46,20 @@ whosat
 ```
 
 That's it. `whosat` will scan your system and display all listening ports and their processes.
+
+## Features
+
+- **Port & Process Monitoring** — See all listening ports with owning processes, CPU/memory usage, and uptime
+- **Memory View** — System-wide process memory usage with GPU memory tracking (NVIDIA)
+- **Docker Integration** — Optional container monitoring alongside system processes
+- **Group & Flat Views** — Group processes by name or view as a flat list
+- **Detail Panel** — Expand any process to see full network info, open ports, resource usage, and CPU sparkline
+- **Actions** — Ping, curl, and kill processes directly from the TUI
+- **Live Refresh** — Configurable auto-refresh (15s / 30s / 1m / 2m / off)
+- **Theming** — 6 built-in themes (matrix, nord, dracula, tokyo-night, gruvbox, solarized)
+- **Search & Filter** — Search by process name, port, or IP; filter by scope (system / docker)
+- **Keyboard Driven** — Full keyboard navigation
+- **Cross-platform** — Linux, macOS, and WSL2
 
 ## Keyboard Shortcuts
 
