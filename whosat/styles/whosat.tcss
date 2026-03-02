@@ -1,0 +1,669 @@
+/* ── whosat color system ───────────────────────────────────── */
+$bg:      #0a0c0f;
+$bg1:     #0e1117;
+$bg2:     #13181f;
+$bg3:     #1a2030;
+$border:  #1e2a38;
+$border2: #243040;
+
+$green:   #00ff88;
+$green2:  #00cc6a;
+$cyan:    #00d4ff;
+$yellow:  #ffd060;
+$red:     #ff4466;
+$purple:  #b084ff;
+$orange:  #ff8844;
+
+$text:    #c8d8e8;
+$text2:   #8aa0b0;
+$text3:   #5a6a7a;
+$dim:     #3a4a5a;
+$muted:   #4a5a6a;
+
+/* ── global ───────────────────────────────────────────────── */
+Screen {
+    background: $bg;
+    color: $text;
+    scrollbar-background: $bg1;
+    scrollbar-color: $border2;
+    scrollbar-color-hover: $dim;
+    scrollbar-color-active: $muted;
+    scrollbar-size-vertical: 1;
+}
+
+/* ── main layout shell ────────────────────────────────────── */
+#main-shell {
+    height: 1fr;
+}
+
+/* ── generic widget defaults ──────────────────────────────── */
+Static {
+    color: $text;
+}
+
+Button {
+    background: $bg2;
+    color: $text2;
+    border: solid $border2;
+    min-width: 6;
+    height: auto;
+}
+
+Button:hover {
+    background: $bg3;
+}
+
+Button:focus {
+    border: solid $cyan;
+}
+
+Button.-primary {
+    background: #0f1b20;
+    color: $green;
+    border: solid $border;
+}
+
+Button.-primary:hover {
+    background: $bg3;
+}
+
+Button.-error {
+    background: #1a0e12;
+    color: $red;
+    border: solid #3a1a23;
+}
+
+Button.-error:hover {
+    background: #2a141a;
+}
+
+Input {
+    background: $bg2;
+    color: $text;
+    border: solid $border2;
+}
+
+Input:focus {
+    border: solid $cyan;
+}
+
+/* ── Pill (reusable badge) ───────────────────────────────── */
+Pill {
+    width: auto;
+    height: 3;
+    padding: 0 1;
+    margin: 0 0 0 1;
+    text-style: bold;
+    content-align: center middle;
+}
+
+Pill.pill-sys {
+    color: $cyan;
+    background: #0a1a22;
+    border: solid #1a3a44;
+}
+
+Pill.pill-sys.pill-active {
+    background: #1a3545;
+    border: solid $cyan;
+}
+
+Pill.pill-docker {
+    color: $purple;
+    background: #12101f;
+    border: solid #2a1a3a;
+}
+
+Pill.pill-docker.pill-active {
+    background: #332a50;
+    border: solid $purple;
+}
+
+/* ── View pills (PORTS / MEMORY) ────────────────────────── */
+Pill.pill-ports {
+    color: $green;
+    background: #0a1a12;
+    border: solid #1a3a24;
+}
+
+Pill.pill-ports.pill-active {
+    background: #0f2a18;
+    border: solid $green;
+}
+
+Pill.pill-memory {
+    color: $orange;
+    background: #1a1208;
+    border: solid #3a2a14;
+}
+
+Pill.pill-memory.pill-active {
+    background: #2a1a0a;
+    border: solid $orange;
+}
+
+/* Dimmed pills (when not on ports view) */
+Pill.pill-dimmed {
+    opacity: 0.4;
+}
+
+
+/* ── HeaderBar ────────────────────────────────────────────── */
+HeaderBar {
+    height: 4;
+    background: $bg1;
+    padding: 0 1;
+    margin: 0;
+    border-bottom: solid $border;
+}
+
+#hdr-logo {
+    width: auto;
+    height: 3;
+    padding: 0 1;
+    background: $bg1;
+    content-align: left middle;
+    border-right: solid $border;
+}
+
+#hdr-live {
+    width: auto;
+    height: 3;
+    padding: 0 1;
+    margin: 0 0 0 1;
+    background: $bg1;
+    content-align: left middle;
+}
+
+#hdr-spacer {
+    width: 1fr;
+    height: 3;
+    background: $bg1;
+}
+
+.stat-box {
+    width: auto;
+    height: 3;
+    padding: 0 1;
+    margin: 0 0 0 1;
+    background: $bg2;
+    border: solid $border;
+    content-align: left middle;
+}
+
+.hdr-ctrl {
+    width: auto;
+    height: 3;
+    padding: 0 1;
+    margin: 0 0 0 1;
+    background: $bg2;
+    border: solid $border2;
+    content-align: left middle;
+}
+
+#hdr-refresh-btn:hover {
+    background: $bg3;
+}
+
+#hdr-clock {
+    width: auto;
+    height: 3;
+    padding: 0 1;
+    margin: 0 0 0 1;
+    background: $bg1;
+    content-align: right middle;
+}
+
+/* ── SysInfoBar ───────────────────────────────────────────── */
+SysInfoBar {
+    layout: horizontal;
+    height: 4;
+    padding: 0 0;
+    background: $bg1;
+    color: $text;
+    margin: 0;
+    border-bottom: solid $border;
+}
+
+SysInfoItem {
+    width: 1fr;
+    height: 3;
+    border-right: solid $border;
+    padding: 0 1;
+}
+
+SysInfoItem.si-last {
+    border-right: none;
+}
+
+.si-label {
+    color: $text3;
+}
+
+.si-value {
+    text-style: bold;
+}
+
+.si-sub {
+    color: $text3;
+}
+
+/* ── Toolbar ──────────────────────────────────────────────── */
+Toolbar {
+    height: 4;
+    padding: 0 0;
+    background: $bg1;
+    border-bottom: solid $border;
+    margin: 0;
+}
+
+/* Search box: prefix + input in one bordered container */
+Toolbar #search-wrap {
+    width: auto;
+    max-width: 38;
+    height: 3;
+    background: $bg2;
+    border: solid $border2;
+}
+
+Toolbar #search-wrap:focus-within {
+    border: solid $cyan;
+}
+
+Toolbar #search-prefix {
+    width: 3;
+    height: 1;
+    color: $green;
+    padding: 0;
+    content-align: center middle;
+}
+
+Toolbar #search {
+    width: 1fr;
+    height: 1;
+    background: transparent;
+    border: none;
+    color: $text;
+}
+
+/* Generic toolbar buttons */
+Toolbar Button {
+    min-width: 5;
+    margin: 0 0 0 1;
+    background: $bg2;
+    border: solid $border2;
+    color: $text3;
+    height: 3;
+}
+
+Toolbar Button:hover {
+    background: $bg3;
+}
+
+/* Sort label — inline */
+Toolbar #sort-label {
+    color: $text3;
+    width: auto;
+    height: 3;
+    padding: 0 1;
+    margin: 0 0 0 1;
+    content-align: center middle;
+}
+
+/* Spacer pushes view buttons right */
+Toolbar #tb-spacer {
+    width: 1fr;
+    height: 1;
+}
+
+/* ── Connected button groups (scope + order) ─────────────── */
+Toolbar #scope-group {
+    height: 3;
+    width: auto;
+    margin: 0 0 0 1;
+    border: solid $border2;
+    background: $bg2;
+}
+
+Toolbar #order-group {
+    height: 3;
+    width: auto;
+    margin: 0 0 0 1;
+    border: solid $border;
+    background: $bg2;
+}
+
+/* Group buttons inside connected groups */
+Toolbar _GroupBtn {
+    width: auto;
+    height: 1;
+    padding: 0 2;
+    color: $text3;
+    content-align: center middle;
+    background: transparent;
+}
+
+Toolbar _GroupBtn:hover {
+    color: $text;
+}
+
+/* Internal divider: left border on 2nd+ button */
+Toolbar .grp-divider {
+    border-left: solid $border2;
+}
+
+/* Scope active states */
+Toolbar .scope-active-all {
+    background: #0f2018;
+    color: $green;
+}
+
+Toolbar .scope-active-sys {
+    background: #0d1a22;
+    color: $cyan;
+}
+
+Toolbar .scope-active-docker {
+    background: #1a1529;
+    color: $purple;
+}
+
+/* Order active state */
+Toolbar .order-active {
+    background: #0f2018;
+    color: $green;
+}
+
+/* View toggle active */
+Toolbar .view-active {
+    border: solid $green !important;
+    color: $green;
+}
+
+/* ── Sidebar ──────────────────────────────────────────────── */
+Sidebar {
+    width: 28;
+    min-width: 26;
+    border-right: solid $border;
+    background: $bg1;
+}
+
+Sidebar .section-hdr {
+    color: $text3;
+    padding: 1 1 0 1;
+    text-style: bold;
+}
+
+Sidebar .cat-item {
+    width: 1fr;
+    height: auto;
+    padding: 0 1;
+    margin: 0 0 1 0;
+    border-left: tall transparent;
+    color: $text2;
+}
+
+Sidebar .cat-item:hover {
+    background: $bg3;
+}
+
+Sidebar .cat-active {
+    background: #0a1f10;
+    color: $green;
+    border-left: tall $green;
+}
+
+Sidebar .quick {
+    color: $text2;
+    padding: 1;
+    border-top: solid $border;
+}
+
+/* ── ProcessTable ─────────────────────────────────────────── */
+#process-table {
+    width: 1fr;
+    background: $bg;
+}
+
+ProcessTable {
+    background: $bg;
+}
+
+ProcessTable #table-hdr-fixed {
+    height: auto;
+    color: $text3;
+    padding: 0 1;
+    background: $bg1;
+    border-bottom: solid $border;
+    text-style: bold;
+}
+
+ProcessTable #table-scroll {
+    height: 1fr;
+    background: $bg;
+}
+
+ProcessTable .group-meta {
+    color: $text2;
+    padding: 0 1;
+}
+
+ProcessTable Button {
+    width: 1fr;
+    margin: 0;
+    text-align: left;
+    height: auto;
+    background: $bg;
+    border: none;
+    color: $text;
+    padding: 0 1;
+    min-width: 0;
+}
+
+ProcessTable Button:hover {
+    background: #0e1519;
+}
+
+ProcessTable Button.-primary {
+    background: #0e1519;
+}
+
+ProcessTable .group-btn {
+    background: $bg2;
+    border: solid $border;
+    margin-top: 1;
+    padding: 0 1;
+}
+
+ProcessTable .group-btn:hover {
+    background: $bg3;
+}
+
+ProcessTable .expanded {
+    padding: 0 2 1 4;
+    color: $text2;
+    background: $bg1;
+    border-bottom: solid $border;
+}
+
+/* ── MemoryTable ─────────────────────────────────────────── */
+#memory-table {
+    width: 1fr;
+    background: $bg;
+    display: none;
+}
+
+MemoryTable {
+    background: $bg;
+}
+
+MemoryTable #mem-summary {
+    height: auto;
+    padding: 0 1;
+    background: $bg1;
+    border-bottom: solid $border;
+}
+
+MemoryTable #mem-hdr-fixed {
+    height: auto;
+    color: $text3;
+    padding: 0 1;
+    background: $bg1;
+    border-bottom: solid $border;
+    text-style: bold;
+}
+
+MemoryTable #mem-scroll {
+    height: 1fr;
+    background: $bg;
+}
+
+MemoryTable Button {
+    width: 1fr;
+    margin: 0;
+    text-align: left;
+    height: auto;
+    background: $bg;
+    border: none;
+    color: $text;
+    padding: 0 1;
+    min-width: 0;
+}
+
+MemoryTable Button:hover {
+    background: #0e1519;
+}
+
+MemoryTable Button.-primary {
+    background: #0e1519;
+}
+
+MemoryTable .mem-gpu-header {
+    padding: 1 1 0 1;
+    color: $text3;
+}
+
+/* ── DetailPanel ──────────────────────────────────────────── */
+DetailPanel {
+    width: 38;
+    min-width: 30;
+    border-left: solid $border;
+    background: $bg1;
+}
+
+DetailPanel #detail-header {
+    height: auto;
+    padding: 0 1;
+    border-bottom: solid $border;
+    background: $bg1;
+}
+
+DetailPanel #detail-title {
+    width: 1fr;
+    color: $text;
+}
+
+DetailPanel #close-btn {
+    background: transparent;
+    border: none;
+    color: $text3;
+    min-width: 8;
+}
+
+DetailPanel #close-btn:hover {
+    background: $bg3;
+}
+
+DetailPanel #detail-body {
+    height: 1fr;
+    background: $bg1;
+}
+
+DetailPanel #detail-info {
+    padding: 1;
+}
+
+DetailPanel Horizontal {
+    height: auto;
+    margin: 0 1 0 1;
+}
+
+DetailPanel Horizontal > Button {
+    margin: 0 1 0 0;
+    min-width: 8;
+    background: $bg2;
+    border: solid $border2;
+    color: $text3;
+}
+
+DetailPanel Horizontal > Button:hover {
+    background: $bg3;
+}
+
+DetailPanel #kill-btn {
+    margin: 0 1 1 1;
+    background: #1a0e12;
+    color: $red;
+    border: solid #3a1a23;
+}
+
+DetailPanel #kill-btn:hover {
+    background: #2a141a;
+}
+
+/* ── FooterBar ────────────────────────────────────────────── */
+FooterBar {
+    height: 1;
+    padding: 0 1;
+    background: $bg1;
+    border-top: solid $border;
+}
+
+/* ── Modals ───────────────────────────────────────────────── */
+CommandOutputModal {
+    align: center middle;
+}
+
+CommandOutputModal > Vertical {
+    width: 90%;
+    height: 85%;
+    background: $bg1;
+    border: round $border;
+    padding: 1;
+}
+
+CommandOutputModal #cmd-title {
+    height: auto;
+    color: $text2;
+}
+
+CommandOutputModal #cmd-output-wrap {
+    height: 1fr;
+    border: solid $border;
+    background: $bg;
+}
+
+CommandOutputModal #cmd-output {
+    padding: 1;
+}
+
+CommandOutputModal #cmd-status {
+    height: auto;
+    color: $text3;
+}
+
+ConfirmKillModal {
+    align: center middle;
+}
+
+ConfirmKillModal > Vertical {
+    width: 70;
+    height: auto;
+    background: $bg1;
+    border: round $red;
+    padding: 1 2;
+}
+
+ConfirmKillModal Button {
+    margin-top: 1;
+}

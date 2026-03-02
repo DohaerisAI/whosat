@@ -1,0 +1,59 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "whosat"
+version = "0.1.0"
+description = "Terminal dashboard for ports, processes, and Docker containers"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.10"
+authors = [{ name = "DohaerisAI" }]
+keywords = ["terminal", "tui", "ports", "processes", "docker", "htop", "network", "monitoring"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Intended Audience :: System Administrators",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: POSIX :: Linux",
+    "Operating System :: MacOS",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: System :: Monitoring",
+    "Topic :: System :: Networking :: Monitoring",
+    "Topic :: System :: Systems Administration",
+    "Topic :: Utilities",
+]
+dependencies = [
+    "textual>=0.47",
+    "psutil>=5.9",
+]
+
+[project.optional-dependencies]
+docker = ["docker>=7.0"]
+
+[project.urls]
+Homepage = "https://github.com/DohaerisAI/whosat"
+Repository = "https://github.com/DohaerisAI/whosat"
+Issues = "https://github.com/DohaerisAI/whosat/issues"
+
+[project.scripts]
+whosat = "whosat.cli:main"
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["whosat*"]
+
+[tool.setuptools.package-data]
+whosat = ["styles/*.tcss"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
