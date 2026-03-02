@@ -362,12 +362,13 @@ class ProcessTable(Vertical):
             col1.append("\u2014", style=text3)
 
         # Column 2: PROCESS INFO
+        _dash = "\u2014"
         col2 = Text(no_wrap=False)
         col2.append("PROCESS INFO\n", style=f"bold {text3}")
         col2.append("PID    ", style=text3)
-        col2.append(f"{row.pid or '\u2014'}\n", style=f"bold {cyan}")
+        col2.append(f"{row.pid or _dash}\n", style=f"bold {cyan}")
         col2.append("User   ", style=text3)
-        col2.append(f"{row.username or '\u2014'}\n", style=text2)
+        col2.append(f"{row.username or _dash}\n", style=text2)
         col2.append("Cmd    ", style=text3)
         cmd_text = (row.cmdline_text or row.exe or "\u2014")[:40]
         col2.append(cmd_text, style=text2)
