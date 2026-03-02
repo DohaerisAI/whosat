@@ -1,6 +1,19 @@
-# whosat
+<p align="center">
+  <img src="https://raw.githubusercontent.com/DohaerisAI/whosat/main/assets/logo.png" alt="whosat" width="400">
+</p>
 
-A terminal dashboard for viewing listening ports, processes, and Docker containers. Like `htop` but focused on network ports.
+<p align="center">
+  <strong>A terminal dashboard for ports, processes, and Docker containers.</strong><br>
+  Like <code>htop</code> but focused on network ports.
+</p>
+
+<p align="center">
+  <a href="https://pypi.org/project/whosat/"><img src="https://img.shields.io/pypi/v/whosat" alt="PyPI"></a>
+  <a href="https://pypi.org/project/whosat/"><img src="https://img.shields.io/pypi/pyversions/whosat" alt="Python"></a>
+  <a href="https://github.com/DohaerisAI/whosat/blob/main/LICENSE"><img src="https://img.shields.io/github/license/DohaerisAI/whosat" alt="License"></a>
+</p>
+
+---
 
 Built with [Textual](https://github.com/Textualize/textual) for a rich TUI experience.
 
