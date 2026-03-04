@@ -41,14 +41,63 @@ pip install 'whosat[docker]'
 
 ## Usage
 
+### TUI Dashboard
+
 ```bash
 whosat
 ```
 
-That's it. `whosat` will scan your system and display all listening ports and their processes.
+Launch the full interactive TUI — live-updating, searchable, themeable.
+
+### CLI One-liners
+
+```bash
+# What's on port 3000?
+whosat 3000
+
+# Kill whatever is on port 8080 (finds parent process, kills the tree)
+whosat kill 8080
+
+# Force kill without confirmation
+whosat kill 8080 --force
+
+# List all ports in a table
+whosat ls
+
+# Sort by CPU usage, descending
+whosat ls --sort cpu --desc
+
+# JSON output — pipe to jq, use in scripts
+whosat --json
+whosat 3000 --json
+whosat ls --json
+```
+
+### Examples
+
+```
+$ whosat 8880
+🐍 :8880 → uvicorn (pid 7218)  TCP/0.0.0.0  [ONLINE]  cpu 0.1%  mem 1.0 GB  up 5h 8m  user adwitiya
+
+$ whosat ls
+PORT    NAME             PID  PROTO  IP           STATUS     CPU     MEM     UPTIME
+22      🔒 sshd            -  TCP    0.0.0.0      ● ONLINE     -       -     -
+3000    📗 node        12847  TCP    0.0.0.0      ● ONLINE  0.2%  115 MB     2h 8m
+5432    🐘 postgres     1234  TCP    127.0.0.1    ● ONLINE  0.0%   42 MB     3d 2h
+8880    🐍 uvicorn      7218  TCP    0.0.0.0      ● ONLINE  0.1%  1.0 GB    5h 8m
+
+$ whosat kill 8000
+🐍 python3 (pid 96365) on port 8000
+Worker pid 96365 is a child of uvicorn (pid 96363)
+Kill uvicorn (pid 96363)? [y/N] y
+Sent SIGTERM to uvicorn (pid 96363)
+```
 
 ## Features
 
+- **CLI Power** — `whosat 3000` for instant port lookup, `whosat kill 3000` to free a port, `whosat ls` for a quick table, `--json` for scripting
+- **Smart Kill** — Detects parent processes (uvicorn master, node supervisor) and kills the whole tree
+- **Port Conflict Detection** — Warns about multiple PIDs on the same port or mixed bind addresses
 - **Port & Process Monitoring** — See all listening ports with owning processes, CPU/memory usage, and uptime
 - **Memory View** — System-wide process memory usage with GPU memory tracking (NVIDIA)
 - **Docker Integration** — Optional container monitoring alongside system processes
