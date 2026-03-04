@@ -10,7 +10,7 @@ from textual.widgets import Static
 
 from whosat import __version__
 from whosat.config import WhosatConfig, load_config, save_config
-from whosat.services.actions import can_kill, send_kill, terminate_then_check
+from whosat.services.actions import can_kill, needs_sudo, resolve_pid_via_sudo, send_kill, sudo_kill, terminate_then_check
 from whosat.services.clipboard import copy_text
 from whosat.services.aggregator import build_categories, build_groups, normalized_group_name
 from whosat.services.filters import apply_filters
@@ -454,28 +454,44 @@ class WhosatApp(App):
             self._render_all()
             return
 
-        def _after(choice: tuple[str, int | None] | None) -> None:
+        require_sudo = needs_sudo(row)
+
+        def _after(choice: tuple[str, int | None, str | None] | None) -> None:
             if not choice:
                 self.set_status_message("Kill canceled")
                 self._render_all()
                 return
-            action, pid = choice
+            action, pid, password = choice
+
+            # Resolve PID via sudo if we don't have one
+            if pid is None and password and row.ports:
+                port = row.ports[0]
+                pid = resolve_pid_via_sudo(port.port, port.proto, password)
+                if pid is None:
+                    self.set_status_message("Could not resolve PID — check password", ttl_seconds=4.0)
+                    self._render_all()
+                    return
+
             if pid is None:
                 self.set_status_message("No PID to kill")
                 self._render_all()
                 return
+
             if action == "term":
-                result = terminate_then_check(pid)
+                result = terminate_then_check(pid, password=password)
                 self.set_status_message(result.message, ttl_seconds=4.0)
                 if result.still_running:
-                    force = send_kill(pid)
+                    if password:
+                        force = sudo_kill(pid, password, sig=9)
+                    else:
+                        force = send_kill(pid)
                     if force.ok:
                         self.set_status_message("SIGKILL sent after SIGTERM grace", ttl_seconds=4.0)
                     else:
                         self.set_status_message(force.message, ttl_seconds=4.0)
                 self.refresh_data()
 
-        self.push_screen(ConfirmKillModal(row), _after)
+        self.push_screen(ConfirmKillModal(row, require_sudo=require_sudo), _after)
 
     def get_current_group_key(self) -> str | None:
         row = self._selected_row()

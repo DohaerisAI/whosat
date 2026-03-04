@@ -156,7 +156,7 @@ class MemoryTable(Vertical):
 
             row_text.append(str(proc.num_threads).rjust(_COL_THR), style=text3)
 
-            btn = Button(id=f"mem-row-{idx}")
+            btn = Button()
             btn.label = row_text
             btn._mem_pid = proc.pid
             if state.memory_selected_pid == proc.pid:
@@ -179,14 +179,12 @@ class MemoryTable(Vertical):
                 gtext.append(str(gp.pid).rjust(_COL_PID), style=text2)
                 gtext.append("  ")
                 gtext.append(fmt_bytes(gp.gpu_memory_bytes).rjust(_COL_RSS), style=f"bold {yellow}")
-                gbtn = Button(id=f"mem-gpu-{gi}")
+                gbtn = Button()
                 gbtn.label = gtext
                 gbtn._mem_pid = gp.pid
                 scroll.mount(gbtn)
 
     def on_button_pressed(self, event: Button.Pressed) -> None:
-        bid = event.button.id or ""
-        if bid.startswith("mem-row-") or bid.startswith("mem-gpu-"):
-            pid = getattr(event.button, "_mem_pid", None)
-            if pid is not None:
-                self.post_message(self.ProcessSelected(pid))
+        pid = getattr(event.button, "_mem_pid", None)
+        if pid is not None:
+            self.post_message(self.ProcessSelected(pid))

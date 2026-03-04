@@ -664,6 +664,13 @@ ConfirmKillModal > Vertical {
     padding: 1 2;
 }
 
+ConfirmKillModal #sudo-pass {
+    margin-top: 1;
+    background: $bg2;
+    border: solid $border2;
+    color: $text;
+}
+
 ConfirmKillModal Button {
     margin-top: 1;
 }

@@ -59,7 +59,7 @@ class DetailPanel(Vertical):
             copy_ip_port.disabled = True
             return
 
-        kill.disabled = row.pid is None
+        kill.disabled = row.pid is None and not row.ports
         has_port = bool(row.ports)
         ping.disabled = not has_port
         curl.disabled = not has_port

@@ -304,6 +304,34 @@ def collect_system_snapshot() -> SystemCollectionResult:
     ss_rows, ss_errors = _get_listening_ports_ss_with_errors()
     errors.extend(ss_errors)
 
+    # Backfill missing PIDs from psutil.net_connections() — ss without root
+    # cannot show process info for other users' sockets.
+    missing_pid = any(r.get("pid") is None for r in ss_rows)
+    if missing_pid:
+        port_pid_map: dict[tuple[int, str], int] = {}
+        try:
+            for c in psutil.net_connections(kind="inet"):
+                laddr = getattr(c, "laddr", None)
+                pid = getattr(c, "pid", None)
+                if not laddr or not pid:
+                    continue
+                port = getattr(laddr, "port", None)
+                ip = getattr(laddr, "ip", None) or ""
+                if port is not None:
+                    port_pid_map[(int(port), str(ip))] = int(pid)
+                    # Also store wildcard lookup for 0.0.0.0 / ::
+                    port_pid_map[(int(port), "")] = int(pid)
+        except Exception:
+            pass
+
+        for row in ss_rows:
+            if row.get("pid") is None:
+                port = int(row.get("port", 0))
+                ip = str(row.get("ip", ""))
+                pid = port_pid_map.get((port, ip)) or port_pid_map.get((port, ""))
+                if pid:
+                    row["pid"] = pid
+
     enriched_rows = [enrich_with_psutil(entry, psutil_module=psutil) for entry in ss_rows]
     enriched_rows, filtered_unknown_count = _apply_well_known_and_noise_filter(enriched_rows)
     if filtered_unknown_count > 5:
